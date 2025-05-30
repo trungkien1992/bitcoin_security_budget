@@ -1,0 +1,40 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Corrected data
+years = np.array([2025, 2028, 2032, 2036, 2040, 2140])
+fees = np.array([2.00, 39.06, 58.59, 68.36, 73.24, 78.13])  # Fixed the values
+halving_years = [2028, 2032, 2036, 2040]
+
+# Create plot
+plt.figure(figsize=(12, 7))
+
+# Plot main trend - FIXED parameter names
+plt.plot(years, fees, marker='o', linestyle='-', color='#f7931a',
+         linewidth=2.5, markersize=8, label='Avg. Transaction Fee (Projected)')
+
+# Add crisis threshold - FIXED function name
+plt.axhline(y=85, color='r', linestyle='--', linewidth=1.5,
+            label='Security Budget Crisis Threshold ($85)')
+
+# Add halving events - FIXED function name and parameters
+for year in halving_years:
+    plt.axvline(x=year, color='gray', linestyle=':', alpha=0.7, linewidth=1.2)
+
+# Annotations
+plt.text(2025, 5, '$2 (Current Fee)', ha='left', va='bottom', fontsize=10)
+plt.text(2140, 80, '$78.13', ha='right', va='center', fontsize=10)
+
+# Formatting
+plt.title('Projected Bitcoin Transaction Fees to Sustain Security Budget\n(Low Network Usage Scenario: 2025-2140)',
+          fontsize=14, pad=20)
+plt.xlabel('Year', fontsize=12)
+plt.ylabel('Average Transaction Fee (USD)', fontsize=12)
+plt.legend(loc='upper left')
+plt.grid(True, linestyle='--', alpha=0.3)
+plt.xlim(2025, 2140)
+plt.ylim(0, 100)
+
+plt.tight_layout()
+plt.savefig('bitcoin_fees_linear.png', dpi=300, bbox_inches='tight')
+plt.show()
